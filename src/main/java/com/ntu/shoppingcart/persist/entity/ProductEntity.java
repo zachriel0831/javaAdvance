@@ -17,7 +17,7 @@ import lombok.Data;
  *
  */
 @Entity
-@Table(name="Product")
+@Table(name="product")
 @Data
 public class ProductEntity {
 
@@ -25,6 +25,13 @@ public class ProductEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "product_id", unique = true, nullable = false, length = 50)
 	private Integer product_id;
+	
+	
+	/**
+	 * 商品類別id 
+	 */
+	@Column(name = "create_time")
+	private Integer category_id;
 
 	@Column(name = "product_name", unique = false, nullable = false, length = 50)
 	private String product_name;
@@ -37,6 +44,8 @@ public class ProductEntity {
 
 	@Lob
 	private byte[] image_data;
+
+	
 
 	@Column(name = "create_time")
 	private Date createTime;

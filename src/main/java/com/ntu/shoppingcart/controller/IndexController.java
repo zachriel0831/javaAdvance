@@ -20,7 +20,7 @@ public class IndexController {
 		model.addAttribute("products", product);
 		model.addAttribute("greetings", "hello world");
 
-		return "index";
+		return "frontend/index";
 	}
 
 }

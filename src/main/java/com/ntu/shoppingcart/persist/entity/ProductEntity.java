@@ -30,7 +30,7 @@ public class ProductEntity {
 	/**
 	 * 商品類別id 
 	 */
-	@Column(name = "create_time")
+	@Column(name = "category_id")
 	private Integer category_id;
 
 	@Column(name = "product_name", unique = false, nullable = false, length = 50)
@@ -46,7 +46,6 @@ public class ProductEntity {
 	private byte[] image_data;
 
 	
-
 	@Column(name = "create_time")
 	private Date createTime;
 	

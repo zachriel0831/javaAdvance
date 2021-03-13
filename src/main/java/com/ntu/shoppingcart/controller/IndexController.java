@@ -13,6 +13,19 @@ import com.ntu.shoppingcart.model.common.Product;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class IndexController {
 	
+	
+	/**
+	 * 首頁
+	 * @return
+	 */
+	@GetMapping
+	public String index(Model model) {
+//		model.addAttribute("products", product);
+		return "frontend/index";
+	}
+	
+	
+	
 	@GetMapping("/login")
 	public String loginPage(Model model) {
 

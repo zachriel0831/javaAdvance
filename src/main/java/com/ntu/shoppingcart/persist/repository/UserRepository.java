@@ -1,6 +1,5 @@
 package com.ntu.shoppingcart.persist.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
 import com.ntu.shoppingcart.persist.entity.UserEntity;

@@ -13,8 +13,7 @@ public class BaseController {
 	 * @return
 	 */
 	protected User getLoginUser() {
-		User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		return loginUser;
+		return  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

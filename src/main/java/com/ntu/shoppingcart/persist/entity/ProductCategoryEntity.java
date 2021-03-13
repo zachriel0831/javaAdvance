@@ -1,7 +1,5 @@
 package com.ntu.shoppingcart.persist.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,27 +10,28 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="product_category")
+@Table(name = "product_category")
 @Data
-public class ProducyCategoryEntity {
+public class ProductCategoryEntity {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "category_id", unique = true, nullable = false, length = 50)
-	private Integer category_id;
-	
+	private Integer categoryId;
 
-	
 	/**
 	 * 商品種類名稱
 	 */
-	@Column
-	private String category_name;
-	
+	@Column(name = "category_name")
+	private String categoryName;
+
 	/**
 	 * 順序
 	 */
-	@Column
-	private Integer order_number;
+	@Column(name = "order_number")
+	private Integer orderNumber;
+	
+	
+	@Column(name = "img_di")
+	private String imgDir;
 }

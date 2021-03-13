@@ -24,32 +24,52 @@ public class ProductEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "product_id", unique = true, nullable = false, length = 50)
-	private Integer product_id;
+	private Integer productId;
 	
 	
 	/**
 	 * 商品類別id 
 	 */
 	@Column(name = "category_id")
-	private Integer category_id;
+	private Integer categoryId;
 
 	@Column(name = "product_name", unique = false, nullable = false, length = 50)
-	private String product_name;
+	private String productName;
 
 	@Column(name = "product_stock", unique = false, nullable = false, length = 50)
-	private String product_stock;
+	private String productStock;
 
 	@Column(name = "product_price", unique = false, nullable = false, length = 50)
-	private String product_price;
+	private String productPrice;
 
-	@Lob
-	private byte[] image_data;
-
+	/**
+	 * 商品描述、說明
+	 */
+	@Column(length=5000)
+	private String description;
 	
+	/**
+	 * 建立時間
+	 */
 	@Column(name = "create_time")
 	private Date createTime;
 	
+	/**
+	 * 更新時間
+	 */
 	@Column(name = "update_time")
 	private Date updateTime;
+	
+	/**
+	 * 上一次更新時間
+	 */
+	@Column(name = "previous_update_time")
+	private Date previousUpdateTime;
+	
+	/**
+	 * 圖片路徑
+	 */
+	@Column(name = "image_dir")
+	private String imageDir;
 
 }

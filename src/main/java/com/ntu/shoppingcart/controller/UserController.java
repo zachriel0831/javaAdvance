@@ -20,8 +20,7 @@ public class UserController extends BaseController {
 
 		User user = getLoginUser();
 		
-		System.out.println("UserId:" + user.getUserId());
-		
+		System.out.println("UserName:" + user.getPassword());
 		
 		Product product = new Product();
 		model.addAttribute("products", product);

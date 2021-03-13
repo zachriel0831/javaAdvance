@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/", "/index", "/login", "/index/login", "/product/**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/index", "/login", "/index/login", "/product/**", "/img/**", "/common/**").permitAll()
 			.anyRequest().authenticated()
 				.and()
 				.formLogin()
@@ -44,12 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 	}
-
-	/**
-	 * 不檢查這些資源(html、js、css或是圖片等等)
-	 */
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/static/**", "/img/**");
-	}
+//
+//	/**
+//	 * 不檢查這些資源(html、js、css或是圖片等等)
+//	 */
+//	@Override
+//	public void configure(WebSecurity web) throws Exception {
+//		web.ignoring().antMatchers("/resources/**", "/static/**", "/img/**");
+//	}
 }

@@ -32,6 +32,6 @@ public class ProductCategoryEntity {
 	private Integer orderNumber;
 	
 	
-	@Column(name = "img_di")
-	private String imgDir;
+	@Column(name = "image_dir")
+	private String imageDir;
 }

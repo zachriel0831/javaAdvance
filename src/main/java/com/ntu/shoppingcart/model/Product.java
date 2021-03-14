@@ -1,26 +1,34 @@
 package com.ntu.shoppingcart.model;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Data
 public class Product {
+	
+	private String productId;
+	
+	private String categoryId;
+	
+	private String productName;
 
-	private String name;
-	
 	private String url;
-	
-	private String price;
-	
-	private String stock;
-	
+
+	private String productPrice;
+
+	private String productStock;
+
 	private String description;
-	
-	public Product(String name, String url, String price, String stock, String description) {
-		this.name = name;
-		this.url = url;
-		this.price = price;
-		this.stock = stock;
-		this.description = description;
-	}
-	
+
+	private String createTime;
+
+	private String updateTime;
+
+	private String previousUpdateTime;
+
+	private String imageDir;
+
 }

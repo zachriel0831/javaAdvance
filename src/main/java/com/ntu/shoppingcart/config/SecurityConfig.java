@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/", "/index", "/login", "/index/login", "/product/**", "/img/**", "/common/**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/index", "/login", "/index/login", "/product/**", "/restProduct/**", "/img/**", "/common/**").permitAll()
 			.anyRequest().authenticated()
 				.and()
 				.formLogin()
@@ -41,15 +40,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(customSuccessHanler)
 				.permitAll()
 				.and().logout().permitAll();
-		
-		
 	}
-//
-//	/**
-//	 * 不檢查這些資源(html、js、css或是圖片等等)
-//	 */
-//	@Override
-//	public void configure(WebSecurity web) throws Exception {
-//		web.ignoring().antMatchers("/resources/**", "/static/**", "/img/**");
-//	}
 }

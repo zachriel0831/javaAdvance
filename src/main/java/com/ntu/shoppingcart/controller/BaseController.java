@@ -16,4 +16,10 @@ public class BaseController {
 		
 		return  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
+	
+	protected void updateShoppingCartCount(Integer totalCount) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		user.setShoppingCartCount(totalCount);
+	}
 }

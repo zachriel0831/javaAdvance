@@ -7,27 +7,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ntu.shoppingcart.model.User;
-import com.ntu.shoppingcart.model.common.Product;
 
 @Controller
-@RequestMapping("/qq")
+@RequestMapping("/u")
 public class UserController extends BaseController {
 
 	
 	@Secured("user")
-	@GetMapping("/page1")
+	@GetMapping("/page")
 	public String loginPage(Model model) {
 
 		User user = getLoginUser();
 		
-		System.out.println("UserId:" + user.getUserId());
-		
-		
-		Product product = new Product();
-		model.addAttribute("products", product);
-		model.addAttribute("greetings", "hello world");
 
-		return "frontend/qq";
+		return "";
 	}
 	
 }

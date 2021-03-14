@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>OOOO購物網</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="/common/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="/common/css/bootstrap.min.css.map" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/common/js/jquery-2.2.4.min.js}"></script>
+	<script type="text/javascript"src="/common/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+<div th:replace="/fragment/nav :: navbar"/>
+
+<div class="container">
+        
+  <div class="mt-3">
+	  <div class="row">
+	          <div class="col-lg-4 col-md-6 mb-4" th:each="productCataLog: ${productCataLogs}">
+	            <div class="card">
+	              <a th:href="@{${productCataLog.url}}"><img class="card-img-top"  th:src="@{${productCataLog.imgDir}}" width="350" height="200" alt="">       
+	              <div class="card-footer">
+	                <h4 class="text-muted"><p  style="color:#007bff" th:text="${productCataLog.name}"></p></h4>
+	              </div>
+				  </a> 
+	            </div>
+	          </div>
+	   </div>
+  	</div>
+</div>
+
+</body>
+</html>

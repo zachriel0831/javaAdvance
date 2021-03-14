@@ -1,17 +1,16 @@
 package com.ntu.shoppingcart.model;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Product {
 	
-	private String productId;
+	private Integer productId;
 	
-	private String categoryId;
+	private Integer categoryId;
 	
 	private String productName;
 
@@ -23,12 +22,29 @@ public class Product {
 
 	private String description;
 
-	private String createTime;
+	private Date createTime;
 
-	private String updateTime;
+	private Date updateTime;
 
-	private String previousUpdateTime;
+	private Date previousUpdateTime;
 
 	private String imageDir;
+
+	public Product(Integer productId, Integer categoryId, String productName, String url, String productPrice,
+			String productStock, String description, Date createTime, Date updateTime, Date previousUpdateTime,
+			String imageDir) {
+		super();
+		this.productId = productId;
+		this.categoryId = categoryId;
+		this.productName = productName;
+		this.url = url;
+		this.productPrice = productPrice;
+		this.productStock = productStock;
+		this.description = description;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.previousUpdateTime = previousUpdateTime;
+		this.imageDir = imageDir;
+	}
 
 }

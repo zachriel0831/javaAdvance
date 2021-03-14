@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>OOOO購物網</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="/common/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="/common/css/bootstrap.min.css.map" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/common/js/jquery-2.2.4.min.js}"></script>
+	<script type="text/javascript"src="/common/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+	<div th:replace="/fragment/nav :: navbar"/>
+
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-3">
+				
+                <div class="card" >
+                    <!-- filter-group  .// -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">品牌 </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_2" style="">
+                            <div class="card-body">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label">Apple
+                                        <b class="badge badge-pill badge-light float-right">1</b>
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label">Samsung
+                                        <b class="badge badge-pill badge-light float-right">15</b>
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label">SONY
+                                        <b class="badge badge-pill badge-light float-right">35</b>
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label">Nokia
+                                        <b class="badge badge-pill badge-light float-right">89</b>
+                                    </div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <div class="custom-control-label">SHARP
+                                        <b class="badge badge-pill badge-light float-right">30</b>
+                                    </div>
+                                </label>
+                            </div>
+                            <!-- card-body.// -->
+                        </div>
+                    </article>
+                    <!-- filter-group .// -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">價格範圍 </h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_3" style="">
+                            <div class="card-body">
+                                <input type="range" class="custom-range" min="0" max="100" name="">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>最小值</label>
+                                        <input class="form-control" placeholder="$0" type="number">
+                                    </div>
+                                    <div class="form-group text-right col-md-6">
+                                        <label>最大值</label>
+                                        <input class="form-control" placeholder="$1,0000" type="number">
+                                    </div>
+                                </div>
+                                <!-- form-row.// -->
+                                <button class="btn btn-block btn-primary">確定</button>
+                            </div>
+                            <!-- card-body.// -->
+                        </div>
+                    </article>
+                </div>
+                <!-- card.// -->
+
+            </aside>
+            <!-- col.// -->
+            <main class="col-md-9">
+
+                <header class="border-bottom mb-4 pb-3">
+                    <div class="form-inline">
+                        <span class="mr-md-auto">[[${itemSize}]] Items found </span>
+                    </div>
+                </header>
+                <!-- sect-heading -->
+				<div th:if="${notEmpty}">
+					<div  th:each="product: ${products}">
+		                <article class="card card-product-list">
+		                    <div class="row no-gutters">
+		                        <aside class="col-md-3">
+		                            <a href="#" class="img-wrap">
+		                                <span class="badge badge-danger"> NEW </span>
+		                                <img th:src="@{${product.url}}" width="220" />
+		                            </a>
+		                        </aside>
+		                        <!-- col.// -->
+		                        <div class="col-md-6">
+		                            <div class="info-main">
+		                                <a href="#" class="h5 title" th:text="${product.name}" > 商品名稱 </a>
+		                                <p th:text="${product.description}"> 商品說明 </p>
+		                            </div>
+		                            <!-- info-main.// -->
+		                        </div>
+		                        <!-- col.// -->
+		                        <aside class="col-sm-3">
+		                            <div class="info-aside">
+		                                <div class="price-wrap">
+		                                    <span class="price h5" th:text="${product.price}"> $140 </span>
+		                                    <del class="price-old"> $198</del>
+		                                </div>
+		                                <!-- info-price-detail // -->
+		                                <p class="text-success">Free shipping</p>
+		                                <br>
+		                                <p>
+		                                    <a href="#" class="btn btn-primary btn-block"> Details </a>
+		                                    <a class="btn btn-light btn-block" th:href="@{${product.addCartUrl}}">
+		                                        <i class="fa fa-heart"></i>
+		                                        <span class="text">加入到購物車</span>
+		                                    </a>
+		                                </p>
+		                            </div>
+		                            <!-- info-aside.// -->
+		                        </aside>
+		                        <!-- col.// -->
+		                    </div>
+		                    <!-- row.// -->
+		                </article>
+		                <!-- card-product .// -->
+					</div>
+	
+	
+	                <nav aria-label="Page navigation sample">
+	                    <ul class="pagination">
+	                        <li class="page-item disabled">
+	                            <a class="page-link" href="#">Previous</a>
+	                        </li>
+	                        <li class="page-item active">
+	                            <a class="page-link" href="#">1</a>
+	                        </li>
+	                        <li class="page-item">
+	                            <a class="page-link" href="#">2</a>
+	                        </li>
+	                        <li class="page-item">
+	                            <a class="page-link" href="#">3</a>
+	                        </li>
+	                        <li class="page-item">
+	                            <a class="page-link" href="#">Next</a>
+	                        </li>
+	                    </ul>
+	                </nav>
+				 </div>
+				 <div th:unless="${notEmpty}">
+					<img th:src="@{/img/search.png}" alt="無相關商品" class="rounded">
+					找不到相關商品資料
+				 </div>
+	           </main>
+	            <!-- col.// -->
+
+		</div>
+	
+    </div>
+
+</body>
+
+</html>F

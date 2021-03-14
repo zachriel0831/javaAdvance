@@ -5,5 +5,9 @@ import java.util.List;
 import com.ntu.shoppingcart.model.Product;
 
 public interface ProductService {
-	List<Product> addNewProduct(Product product);
+
+	
+	public List<Product> findProductsByCategory(String categoryId);
+
+	public List<Product> addNewProduct(Product product);
 }

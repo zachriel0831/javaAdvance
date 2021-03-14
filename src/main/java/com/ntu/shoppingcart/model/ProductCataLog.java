@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class ProductCataLog {
 
-	private String id;
+	private String imgDir;
 	
 	private String name;
 	
 	private String url;
 	
-	public ProductCataLog(String id, String name, String url) {
-		this.id = id;
+	public ProductCataLog(String imgDir, String name, String url) {
+		this.imgDir = imgDir;
 		this.name = name;
 		this.url = url;
 	}

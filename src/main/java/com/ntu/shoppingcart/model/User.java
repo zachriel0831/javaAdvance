@@ -19,6 +19,9 @@ public class User implements UserDetails {
 	private String pwd;
 	
 	private Collection<? extends GrantedAuthority> authorities;
+	
+	
+	private Integer shoppingCartCount;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

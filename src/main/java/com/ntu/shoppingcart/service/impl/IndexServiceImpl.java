@@ -29,8 +29,12 @@ public class IndexServiceImpl implements IndexService {
 		Page<ProductCategoryEntity> productCataLogs = productCategoryRepository.findAll(pageable);
 
 		return productCataLogs.stream()
-				.map(m -> new ProductCataLog(Integer.toString(m.getCategoryId()), m.getCategoryName(), m.getImageDir()))
+				.map(m -> new ProductCataLog( m.getImageDir(), m.getCategoryName(), getPath(m.getCategoryId())))
 				.collect(Collectors.toList());
 	}
 
+	
+	private String getPath(Integer id) {
+		return "/product/catalog/" + Integer.toString(id);
+	}
 }

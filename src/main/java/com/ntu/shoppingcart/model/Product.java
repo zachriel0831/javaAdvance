@@ -15,12 +15,15 @@ public class Product {
 	
 	private String description;
 	
-	public Product(String name, String url, String price, String stock, String description) {
+	private String addCartUrl;
+	
+	public Product(String name, String url, String price, String stock, String description, String addCartUrl) {
 		this.name = name;
 		this.url = url;
 		this.price = price;
 		this.stock = stock;
 		this.description = description;
+		this.addCartUrl = addCartUrl;
 	}
 	
 }

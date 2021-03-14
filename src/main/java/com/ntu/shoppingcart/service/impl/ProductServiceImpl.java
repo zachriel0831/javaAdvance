@@ -16,6 +16,8 @@ import com.ntu.shoppingcart.util.NumberUtils;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+	
+	private final static String SHOPPING_CART_URI = "/shopping/cart/add/";
 
 	@Autowired
 	private ProductRepository productRepository;
@@ -29,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		List<ProductEntity> products = productRepository.findByCategoryId(Integer.parseInt(categoryId));
 		return products.stream().map(m -> new Product(m.getProductName(), m.getImageDir(), m.getProductPrice(),
-				m.getProductStock(), m.getDescription())).collect(Collectors.toList());
+				m.getProductStock(), m.getDescription(), SHOPPING_CART_URI + m.getProductId())).collect(Collectors.toList());
 	}
 
 }

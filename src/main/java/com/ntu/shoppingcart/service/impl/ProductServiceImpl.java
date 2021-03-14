@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> findProductsByCategory(String categoryId) {
-		
-		if(ObjectUtils.isEmpty(categoryId) || NumberUtils.isNotNumeric(categoryId)) {
+
+		if (ObjectUtils.isEmpty(categoryId) || NumberUtils.isNotNumeric(categoryId)) {
 			return new ArrayList<>();
 		}
 

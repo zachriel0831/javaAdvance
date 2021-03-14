@@ -1,29 +1,50 @@
 package com.ntu.shoppingcart.model;
 
+import java.util.Date;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Product {
+	
+	private Integer productId;
+	
+	private Integer categoryId;
+	
+	private String productName;
 
-	private String name;
-	
 	private String url;
-	
-	private String price;
-	
-	private String stock;
-	
+
+	private String productPrice;
+
+	private String productStock;
+
 	private String description;
-	
-	private String addCartUrl;
-	
-	public Product(String name, String url, String price, String stock, String description, String addCartUrl) {
-		this.name = name;
+
+	private Date createTime;
+
+	private Date updateTime;
+
+	private Date previousUpdateTime;
+
+	private String imageDir;
+
+	public Product(Integer productId, Integer categoryId, String productName, String url, String productPrice,
+			String productStock, String description, Date createTime, Date updateTime, Date previousUpdateTime,
+			String imageDir) {
+		super();
+		this.productId = productId;
+		this.categoryId = categoryId;
+		this.productName = productName;
 		this.url = url;
-		this.price = price;
-		this.stock = stock;
+		this.productPrice = productPrice;
+		this.productStock = productStock;
 		this.description = description;
-		this.addCartUrl = addCartUrl;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.previousUpdateTime = previousUpdateTime;
+		this.imageDir = imageDir;
 	}
-	
+
 }

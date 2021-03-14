@@ -8,4 +8,6 @@ public interface ProductService {
 
 	
 	public List<Product> findProductsByCategory(String categoryId);
+
+	public List<Product> addNewProduct(Product product);
 }

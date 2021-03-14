@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ntu.shoppingcart.model.common.Product;
+import com.ntu.shoppingcart.service.impl.ProductServiceImpl;
 import com.ntu.shoppingcart.model.ProductCataLog;
 import com.ntu.shoppingcart.service.IndexService;
 
@@ -19,6 +21,7 @@ public class IndexController {
 	
 	@Autowired
 	private IndexService indexService;
+	
 	
 	/**
 	 * 首頁

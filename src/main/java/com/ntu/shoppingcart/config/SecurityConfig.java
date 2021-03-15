@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-
+	
 	@Qualifier("customSuccessHanler")
 	@Autowired
 	private AuthenticationSuccessHandler customSuccessHanler;

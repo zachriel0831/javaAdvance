@@ -111,13 +111,13 @@
 		                        <aside class="col-md-3">
 		                            <a href="#" class="img-wrap">
 		                                <span class="badge badge-danger"> NEW </span>
-		                                <img th:src="@{${product.url}}" width="220" />
+		                                <img th:src="@{${product.imageDir}}" width="220" />
 		                            </a>
 		                        </aside>
 		                        <!-- col.// -->
 		                        <div class="col-md-6">
 		                            <div class="info-main">
-		                                <a href="#" class="h5 title" th:text="${product.name}" > 商品名稱 </a>
+		                                <a href="#" class="h5 title" th:text="${product.productName}" > 商品名稱 </a>
 		                                <p th:text="${product.description}"> 商品說明 </p>
 		                            </div>
 		                            <!-- info-main.// -->
@@ -126,7 +126,7 @@
 		                        <aside class="col-sm-3">
 		                            <div class="info-aside">
 		                                <div class="price-wrap">
-		                                    <span class="price h5" th:text="${product.price}"> $140 </span>
+		                                    <span class="price h5" th:text="${product.productPrice}"> $140 </span>
 		                                    <del class="price-old"> $198</del>
 		                                </div>
 		                                <!-- info-price-detail // -->
@@ -134,7 +134,7 @@
 		                                <br>
 		                                <p>
 		                                    <a href="#" class="btn btn-primary btn-block"> Details </a>
-		                                    <a class="btn btn-light btn-block" th:href="@{${product.addCartUrl}}">
+		                                    <a class="btn btn-light btn-block add-cart" th:attr="data-id=${product.getProductId()}"> 
 		                                        <i class="fa fa-heart"></i>
 		                                        <span class="text">加入到購物車</span>
 		                                    </a>
@@ -183,8 +183,23 @@
 	<script>
 	
 		$(function(){
-			$('a[name="add-cart"]').on('click', function(e){
-					alert($(this).children().find(''))
+			$('a.add-cart').on('click', function(e){
+				$.ajax({
+				    type: "POST",
+				    url: "/shopping/cart/add",
+				    data: JSON.stringify({productId : ~~Number($(this).attr('data-id')), count: 1}),
+				    contentType: "application/json; charset=utf-8",
+				    dataType: "json",
+				    success: function(data){
+					console.log(data)
+						if(data.success){
+							$('#mycart').text(data.count);							
+						}
+					},
+				    error: function(errMsg) {
+				        alert(errMsg);
+				    }
+				});
 			});
 		});
 	

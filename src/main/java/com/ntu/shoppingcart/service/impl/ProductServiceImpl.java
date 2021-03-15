@@ -42,7 +42,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> addNewProduct(Product product) {
-
 		DozerBeanMapper mapper = new DozerBeanMapper();
 		Date currentTime = new Date(System.currentTimeMillis());
 		ProductEntity productEntity = mapper.map(product, ProductEntity.class);

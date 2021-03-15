@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Product {
-	
+
 	private Integer productId;
-	
+
 	private Integer categoryId;
-	
+
 	private String productName;
 
 	private String url;
@@ -30,6 +30,8 @@ public class Product {
 
 	private String imageDir;
 
+	private String addCartUrl;
+
 	public Product(Integer productId, Integer categoryId, String productName, String url, String productPrice,
 			String productStock, String description, Date createTime, Date updateTime, Date previousUpdateTime,
 			String imageDir) {
@@ -45,6 +47,15 @@ public class Product {
 		this.updateTime = updateTime;
 		this.previousUpdateTime = previousUpdateTime;
 		this.imageDir = imageDir;
+	}
+
+	public Product(String productName, String url, String price, String stock, String description, String addCartUrl) {
+		this.productName = productName;
+		this.url = url;
+		this.productPrice = price;
+		this.productStock = stock;
+		this.description = description;
+		this.addCartUrl = addCartUrl;
 	}
 
 }

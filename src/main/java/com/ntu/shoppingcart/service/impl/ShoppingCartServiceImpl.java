@@ -29,14 +29,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 				.ofNullable(shoppingCartRepository.findByUserIdAndProductId(user.getUserId(), productId)).orElse(new ShoppingCartEntity());
 
 		ShoppingCartEntity shoppingCartEntity = new ShoppingCartEntity();
-
+		
 		if (!ObjectUtils.isEmpty(entity.getId())) {
 			shoppingCartEntity.setId(entity.getId());
 		}
-		Integer nowCount = shoppingCartEntity.getCount() == null ? 0 : shoppingCartEntity.getCount();
+		Integer nowCount = entity.getCount() == null ? 0 : entity.getCount();
 		shoppingCartEntity.setCount(nowCount + count);
 		shoppingCartEntity.setUserId(user.getUserId());
 		shoppingCartEntity.setProductId(productId);
+		
 		shoppingCartRepository.save(shoppingCartEntity);
 	}
 

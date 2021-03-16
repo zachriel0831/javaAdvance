@@ -70,5 +70,11 @@ public class ProductEntity {
 	 */
 	@Column(name = "image_dir")
 	private String imageDir;
+	
+	/**
+	 * 狀態參數 0 刪除 , 1上架
+	 */
+	@Column(name = "status", unique = false, nullable = false, length = 50)
+	private String status;
 
 }

@@ -3,6 +3,7 @@ package com.ntu.shoppingcart.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import com.ntu.shoppingcart.util.NumberUtils;
 public class ProductServiceImpl implements ProductService {
 
 	private final static String SHOPPING_CART_URI = "/shopping/cart/add/";
+
+	private final static String PRODUCT_STATUS_ON = "1";
+	private final static String PRODUCT_STATUS_OFF = "0";
 
 	@Autowired
 	private ProductRepository productRepository;
@@ -48,17 +52,59 @@ public class ProductServiceImpl implements ProductService {
 		productEntity.setCreateTime(currentTime);
 		productEntity.setUpdateTime(currentTime);
 		productEntity.setPreviousUpdateTime(currentTime);
+		productEntity.setStatus(PRODUCT_STATUS_ON);
 
 		productRepository.save(productEntity);
 
-		List<ProductEntity> results = productRepository.findAll();
+		return selectAllProduct();
+	}
+
+	@Override
+	public List<Product> deleteProducts(List<Integer> productIds) {
+		Date currentTime = new Date(System.currentTimeMillis());
+
+		for (int id : productIds) {
+
+			Optional<ProductEntity> productEntityOptional = productRepository.findById(id);
+
+			productEntityOptional.ifPresent(productEntity -> {
+				productEntity.setUpdateTime(currentTime);
+				productEntity.setPreviousUpdateTime(currentTime);
+				productEntity.setStatus(PRODUCT_STATUS_OFF);
+
+				productRepository.save(productEntity);
+
+			});
+		}
+
+		return selectAllProduct();
+	}
+
+	@Override
+	public List<Product> updateProduct(Product product) {
+		DozerBeanMapper mapper = new DozerBeanMapper();
+		Date currentTime = new Date(System.currentTimeMillis());
+		ProductEntity productEntity = mapper.map(product, ProductEntity.class);
+		productEntity.setCreateTime(currentTime);
+		productEntity.setUpdateTime(currentTime);
+		productEntity.setPreviousUpdateTime(currentTime);
+		productEntity.setStatus(PRODUCT_STATUS_ON);
+
+		productRepository.save(productEntity);
+
+		return selectAllProduct();
+	}
+	
+	@Override
+	public List<Product> selectAllProduct() {
+
+		List<ProductEntity> results = productRepository.selectAllProduct("1");
 		List<Product> productResult = results.stream()
 				.map(m -> new Product(m.getProductId(), m.getCategoryId(), m.getProductName(),
 						SHOPPING_CART_URI + m.getProductId(), m.getProductPrice(), m.getProductStock(),
 						m.getDescription(), m.getCreateTime(), m.getUpdateTime(), m.getPreviousUpdateTime(),
 						m.getImageDir()))
 				.collect(Collectors.toList());
-
 		return productResult;
 	}
 }

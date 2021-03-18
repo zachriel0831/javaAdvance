@@ -33,13 +33,13 @@
 				      <a class="nav-link" href="#" sec:authentication="principal.user">user</a>
 				    </li>
 					<li class="nav-item">
-						<a class="btn btn-success btn-sm ml-3" href="cart.html" sec:authorize="isAuthenticated()">
+						<a class="btn btn-success btn-sm ml-3" th:href="@{/shopping/cart/mylist}" sec:authorize="isAuthenticated()">
 		                    <i class="fa fa-shopping-cart"></i> Cart
 		                    <span class="badge badge-light" id="mycart" sec:authentication="principal.shoppingCartCount">0</span>
 		                </a>
 					</li>
 				    <li class="nav-item active">
-				      <a class="nav-link" href="#">登出</a>
+				      <a class="nav-link" th:href="@{/logout}" >登出</a>
 				    </li>
 				</ul>
 			

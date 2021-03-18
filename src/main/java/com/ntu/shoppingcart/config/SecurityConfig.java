@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		http.authorizeRequests().antMatchers("/", "/index", "/login", "/index/login", "/product/**", "/restProduct/**", "/img/**", "/common/**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/cartQQ", "/index", "/login", "/index/login", "/product/**", "/restProduct/**", "/img/**", "/common/**").permitAll()
 			.anyRequest().authenticated() //除了以上的請求都要身分驗證
 				.and()
 				.formLogin() 
@@ -44,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordParameter("pwd")
 				.successHandler(customSuccessHanler)
 				.permitAll()
-				.and().logout().permitAll();
+				.and().logout()
+				.logoutSuccessUrl("/index")
+				.permitAll();
 	}
 }

@@ -20,7 +20,7 @@ import com.ntu.shoppingcart.util.NumberUtils;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	private final static String SHOPPING_CART_URI = "/shopping/cart/add/";
+	private final static String SHOPPING_CART_PATH = "/shopping/cart/add/";
 
 	private final static String PRODUCT_STATUS_ON = "1";
 	private final static String PRODUCT_STATUS_OFF = "0";
@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
 		List<ProductEntity> products = productRepository.findByCategoryId(Integer.parseInt(categoryId));
 		return products.stream()
 				.map(m -> new Product(m.getProductId(), m.getCategoryId(), m.getProductName(),
-						SHOPPING_CART_URI + m.getProductId(), m.getProductPrice(), m.getProductStock(),
+						SHOPPING_CART_PATH + m.getProductId(), m.getProductPrice(), m.getProductStock(),
 						m.getDescription(), m.getCreateTime(), m.getUpdateTime(), m.getPreviousUpdateTime(),
 						m.getImageDir()))
 				.collect(Collectors.toList());
@@ -97,11 +97,10 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<Product> selectAllProduct() {
-
 		List<ProductEntity> results = productRepository.selectAllProduct("1");
 		List<Product> productResult = results.stream()
 				.map(m -> new Product(m.getProductId(), m.getCategoryId(), m.getProductName(),
-						SHOPPING_CART_URI + m.getProductId(), m.getProductPrice(), m.getProductStock(),
+						SHOPPING_CART_PATH + m.getProductId(), m.getProductPrice(), m.getProductStock(),
 						m.getDescription(), m.getCreateTime(), m.getUpdateTime(), m.getPreviousUpdateTime(),
 						m.getImageDir()))
 				.collect(Collectors.toList());

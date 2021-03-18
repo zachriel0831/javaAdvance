@@ -1,5 +1,10 @@
 package com.ntu.shoppingcart.controller;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ntu.shoppingcart.model.ShoppingCart;
+import com.ntu.shoppingcart.model.ShoppingCartDetail;
 import com.ntu.shoppingcart.model.User;
 import com.ntu.shoppingcart.service.ShoppingCartService;
 
@@ -35,9 +41,29 @@ public class ShoppingCartController extends BaseController {
 	}
 	
 	@Secured("user")
+	@PostMapping("/subtotal")
+	public ShoppingCart subtotal(@RequestBody ShoppingCart shoppingCart) {
+		User user = getLoginUser();
+		ShoppingCart result = new ShoppingCart();
+		
+		
+		return result;
+	}
+	
+	
+	@Secured("user")
 	@GetMapping("/mylist")
 	public ModelAndView shoppingCartPage() {
-		return new ModelAndView("shopcart");
+		ModelAndView view = new ModelAndView("shopcart");
+		User user = getLoginUser();
+		List<ShoppingCartDetail> myCartList = shoppingCartService.findMyCartList(user);
+		
+		BigDecimal total = shoppingCartService.getTotal(myCartList);
+		
+		view.addObject("myCartList", myCartList);
+		view.addObject("total", total);
+		
+		return view;
 	}
 	
 }

@@ -44,8 +44,6 @@ public class MyUserService implements UserDetailsService {
 		
 		Integer count = shoppingCartRepository.findTotalCount(userEntity.getUserId());
 		
-		System.out.println("count:" + count);
-		
 		user.setShoppingCartCount(count == null ? 0 : count);
 		
 		return user;

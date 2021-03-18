@@ -9,6 +9,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 產品類別
+ *
+ */
 @Entity
 @Table(name = "product_category")
 @Data
@@ -20,7 +24,7 @@ public class ProductCategoryEntity {
 	private Integer categoryId;
 
 	/**
-	 * 商品種類名稱
+	 * 種類名稱
 	 */
 	@Column(name = "category_name")
 	private String categoryName;

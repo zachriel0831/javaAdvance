@@ -9,6 +9,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 購物車
+ *
+ */
 @Entity
 @Data
 @Table(name="shopping_cart")

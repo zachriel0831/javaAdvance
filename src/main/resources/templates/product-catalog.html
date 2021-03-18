@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head>
-    <title>OOOO購物網</title> 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="/common/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link href="/common/css/bootstrap.min.css.map" rel="stylesheet">
-	<script type="text/javascript" th:src="@{/common/js/jquery-2.2.4.min.js}"></script>
-	<script type="text/javascript"src="/common/js/bootstrap.min.js"></script>
 
+<head th:include="fragment/head :: header">
+    <title id="pageTitle">OOOO購物網</title>
 </head>
 
 <body>
 
 	<div th:replace="/fragment/nav :: navbar"/>
 
+  <div class="mt-3">
     <div class="container">
         <div class="row">
             <aside class="col-md-3">
@@ -134,7 +130,12 @@
 		                                <br>
 		                                <p>
 		                                    <a href="#" class="btn btn-primary btn-block"> Details </a>
-		                                    <a class="btn btn-light btn-block add-cart" th:attr="data-id=${product.getProductId()}"> 
+		                                    <a class="btn btn-light btn-block add-cart" sec:authorize="isAuthenticated()" th:attr="data-id=${product.getProductId()}"> 
+		                                        <i class="fa fa-heart"></i>
+		                                        <span class="text">加入到購物車</span>
+		                                    </a>
+											
+											<a class="btn btn-light btn-block" id="notLoginCart" sec:authorize="!isAuthenticated()">
 		                                        <i class="fa fa-heart"></i>
 		                                        <span class="text">加入到購物車</span>
 		                                    </a>
@@ -178,7 +179,7 @@
 	            <!-- col.// -->
 
 		</div>
-	
+   	 </div>
     </div>
 	<script>
 	
@@ -191,7 +192,6 @@
 				    contentType: "application/json; charset=utf-8",
 				    dataType: "json",
 				    success: function(data){
-					console.log(data)
 						if(data.success){
 							$('#mycart').text(data.count);							
 						}
@@ -200,6 +200,13 @@
 				        alert(errMsg);
 				    }
 				});
+			});
+			
+			$('#notLoginCart').on('click', function(e){
+				alert('請先登入會員');
+				
+				window.location.href='/index/login';
+				
 			});
 		});
 	

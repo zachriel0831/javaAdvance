@@ -17,6 +17,8 @@ import com.ntu.shoppingcart.service.IndexService;
 
 @Service
 public class IndexServiceImpl implements IndexService {
+	
+	private static final String PATH = "/product/catalog/";
 
 	@Autowired
 	private ProductCategoryRepository productCategoryRepository;
@@ -35,6 +37,6 @@ public class IndexServiceImpl implements IndexService {
 
 	
 	private String getPath(Integer id) {
-		return "/product/catalog/" + Integer.toString(id);
+		return PATH + Integer.toString(id);
 	}
 }

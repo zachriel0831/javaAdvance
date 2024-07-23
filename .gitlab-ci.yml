@@ -1,0 +1,62 @@
+stages:
+  - build
+  - code_review
+  - notify
+  - test
+
+#variables:
+#  JAVA_SERVICE_API_URL: "http://your-java-service-endpoint/codeguru-review"
+
+build:
+  stage: build
+  script:
+    - echo "Building the project..."
+#    - ./build.sh  # 替换为您的构建脚本
+
+code_review:
+  stage: code_review
+  script:
+    - echo "Triggering CodeGuru Review..."
+    - aws codeguru-reviewer create-code-review --name MyCodeReview --repository-association-arn arn:aws:codeguru-reviewer:your-region:your-account-id:association:your-association-id --type Commit --commit-id $CI_COMMIT_SHA
+    - echo "CodeGuru Review triggered."
+  only:
+    - master  # 或者是您希望触发CodeGuru Review的分支
+
+notify:
+  stage: notify
+  script:
+    - echo "Notifying Java service..."
+    - curl -X POST -H "Content-Type: application/json" -d '{"commitId":"'"$CI_COMMIT_SHA"'","reviewArn":"'"$CODE_REVIEW_ARN"'"}' $JAVA_SERVICE_API_URL
+  only:
+    - main
+
+test:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - ./run_tests.sh  # 替换为您的测试脚本
+
+codeguru_security_example:
+  image:
+    name: public.ecr.aws/l6c8c5q3/codegurusecurity-actions-public:latest
+    entrypoint: [""]
+  variables:
+    ROLE_ARN: arn:aws:iam::951775734532:role/CodeGuruSecurityGitLabAccessRole
+    AWS_PROFILE: oidc # used to get the credential. More detail: https://gitlab.com/guided-explorations/aws/configure-openid-connect-in-aws/-/tree/main
+  id_tokens:
+    MY_OIDC_TOKEN:
+      aud: https://gitlab.com
+  before_script:
+    - mkdir -p ~/.aws
+    - echo "${MY_OIDC_TOKEN}" > /tmp/web_identity_token
+    - echo -e "[profile oidc]\nrole_arn=${ROLE_ARN}\nweb_identity_token_file=/tmp/web_identity_token" > ~/.aws/config
+  script:
+    - REPO_NAME="`basename -s .git $(echo $CI_REPOSITORY_URL | grep -oE "[^/]+$")`"
+    - python /usr/app/codeguru/command.py --source_path "." --aws_region "ap-southeast-1" --scan_name CGS-GitLab-$REPO_NAME --fail_on_severity Critical --analysis_type All --output_file_format "sast"
+    - cat codeguru-security-results.sast.json
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"
+      when: always
+  artifacts:
+    reports:
+      sast: codeguru-security-results.sast.json
